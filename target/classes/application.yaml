@@ -1,0 +1,36 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: EduFood
+
+  datasource:
+    url: jdbc:h2:./db/demo;AUTO_SERVER=true
+    username: root
+    password: qwerty
+    driver-class-name: org.h2.Driver
+
+    mvc:
+      static-path-pattern: /static/**
+      log-request-details: false
+
+    liquibase:
+      change-log: classpath:/db/changelog/master.yaml
+    jpa:
+      hibernate:
+        ddl-auto: validate
+
+      properties:
+        hibernate:
+          generate_statistics: true
+          format_sql: true
+      show-sql: true
+
+  logging:
+    level:
+      root: info
+
+
+    file:
+      name: logs/spring.log
