@@ -1,4 +1,4 @@
-2024-05-11 18:11:00.776231+06:00 jdbc[3]: exception
+2024-05-12 01:29:23.372324+06:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "DATABASECHANGELOGLOCK" не найдена
 Table "DATABASECHANGELOGLOCK" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK [42102-224]
