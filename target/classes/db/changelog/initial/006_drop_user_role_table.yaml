@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table USER_AUTHORITY
+      author: Argen
+      changes:
+        - dropTable:
+            tableName: user_role
