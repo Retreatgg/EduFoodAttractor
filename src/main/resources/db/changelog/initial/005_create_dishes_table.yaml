@@ -28,4 +28,17 @@ databaseChangeLog:
                   type: double
                   constraints:
                     nullable: false
+              - column:
+                  name: image
+                  type: varchar(250)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: restaurant_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_restaurant_id
+                    references: restaurants(id)
+
 

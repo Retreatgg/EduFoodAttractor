@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: Update table USERS
+      author: Argen
+      changes:
+        - addColumn:
+            tableName: USERS
+            columns:
+              - column:
+                  name: account_type
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_authorities_id
+                    references: authorities(id)
