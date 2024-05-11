@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create orders item table
+      author: Adil
+      changes:
+        - createTable:
+            tableName: orders_item
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_id
+                    references: orders(id)
+              - column:
+                  name: dish_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_dish_id
+                    references: dishes(id)
