@@ -20,13 +20,13 @@ public class AuthController {
 
     @GetMapping("login")
     public String login() {
-        return "login/login";
+        return "auth/login";
     }
 
     @GetMapping("register")
     public String register(Model model) {
         model.addAttribute("userDto", new UserCreateDto());
-        return "/user/create_user";
+        return "auth/register";
     }
 
     @PostMapping("register")

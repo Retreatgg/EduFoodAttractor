@@ -1,14 +1,16 @@
 package com.example.edufood.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Table(name = "authorities")
 public class Authority {
 
@@ -20,9 +22,9 @@ public class Authority {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            name = "users",
+            joinColumns = @JoinColumn(name = "account_type"),
+            inverseJoinColumns = @JoinColumn(name = "id")
     )
     private List<User> users;
 }

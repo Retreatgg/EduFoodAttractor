@@ -1,7 +1,9 @@
 package com.example.edufood.service.impl;
 
 import com.example.edufood.dto.UserCreateDto;
+import com.example.edufood.model.Authority;
 import com.example.edufood.model.User;
+import com.example.edufood.repository.AuthorityRepository;
 import com.example.edufood.repository.UserRepository;
 import com.example.edufood.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder encoder;
 
 
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .avatar("unnamed.jpg")
+                .accountTypeId(1L)
                 .build();
 
         userRepository.save(newUser);

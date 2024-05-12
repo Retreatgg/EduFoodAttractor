@@ -30,6 +30,9 @@ public class User {
     private String avatar;
     private Boolean enabled;
 
+    @Column(name = "account_type")
+    private Long accountTypeId;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users", cascade = CascadeType.ALL)
     private List<Authority> authorities;
 
