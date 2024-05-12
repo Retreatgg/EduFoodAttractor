@@ -16,10 +16,10 @@ public class CartOrders {
     private Long id;
 
     @ManyToOne
-    @Column(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
-    @Column(name = "dish_id")
+    @JoinColumn(name = "dish_id")
     private Dish dish;
 }

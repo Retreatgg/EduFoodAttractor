@@ -18,11 +18,11 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @Column(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @Column(name = "created_date")

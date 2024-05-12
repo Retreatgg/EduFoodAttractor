@@ -21,7 +21,7 @@ public class Dish {
     private String image;
 
     @ManyToOne
-    @Column(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish")
