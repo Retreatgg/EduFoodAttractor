@@ -10,4 +10,6 @@ import org.springframework.stereotype.Service;
 public interface RestaurantService {
 
     Page<RestaurantDto> getAllRestaurants(Pageable pageable);
+
+    RestaurantDto getRestaurantById(Long id);
 }
