@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <p>${dish.description}</p>
-                                    <form onsubmit="addToCart(${dish.id}); return false;">
+                                    <form onsubmit="addToCart(${dish.id}, '${dish.name}'); return false;">
                                         <input type="hidden" name="dishId" value="${dish.id}">
                                         <button type="submit" class="btn btn-primary">Добавить в корзину</button>
                                     </form>
@@ -145,14 +145,48 @@
         </div>
     </section>
 
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Ваша корзина</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script>
-        function addToCart(dishId) {
+        function addToCart(dishId, dishName) {
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-            cartItems.push({ dishId: dishId });
+            cartItems.push({ dishId: dishId, dishName: dishName});
 
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
+
+        $(document).ready(function() {
+            $('.btn.btn-primary[data-toggle="modal"][data-target="#cartModal"]').click(function() {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                let modalBody = $('.modal-body');
+                modalBody.empty();
+                cartItems.forEach(function(item) {
+                    modalBody.append('<p>' + item.dishName + '</p>');
+                });
+            });
+        });
     </script>
 
 </@main.layout>
