@@ -146,13 +146,19 @@
                         </a>
                     </div>
                 </div>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cartModal">
+                    Ваша корзина
+                </button>
             </nav>
         </div>
     </header>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <#nested>
-
 </body>
 </html>
 </#macro>
