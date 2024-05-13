@@ -109,7 +109,7 @@
                 const cardLink = document.createElement("a");
                 cardLink.href = '/restaurant/' + item.id;
                 cardLink.classList.add('btn', 'btn-dark', 'mt-auto');
-                cardLink.textContent = 'Перейти в ресторан'
+                cardLink.textContent = 'Перейти в ресторан';
 
                 cardBody.appendChild(cardTitle);
                 cardBody.appendChild(cardText);

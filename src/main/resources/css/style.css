@@ -126,7 +126,6 @@ a:focus {
 }
 
 .custom_nav-container .nav_search-btn {
-    background-image: url(../../../../data/images/search-icon.png);
 
     background-size: 22px;
     background-repeat: no-repeat;
