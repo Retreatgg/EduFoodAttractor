@@ -112,7 +112,7 @@
             background-size: 55px;
         }
 
-        .quote_btn-container a, button {
+        .quote_btn-container a {
             display: inline-block;
             padding: 5px 15px;
             background-color: #fc5d35;

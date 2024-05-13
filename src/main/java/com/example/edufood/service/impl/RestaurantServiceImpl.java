@@ -41,6 +41,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         throw new IllegalArgumentException(error);
     }
 
+    @Override
+    public int lengthRestaurants() {
+        return restaurantRepository.findAll().size();
+    }
+
     private List<RestaurantDto> transformListModelForDtos(List<Restaurant> restaurants) {
         List<RestaurantDto> dtos = new ArrayList<>();
 

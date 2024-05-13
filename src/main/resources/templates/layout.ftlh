@@ -39,7 +39,7 @@
             margin: 0 auto;
         }
 
-        .custom_nav-container.navbar-expand-lg  {
+        .custom_nav-container.navbar-expand-lg .navbar-nav .nav-link {
             padding: 10px 30px;
             color: #343434;
             text-align: center
@@ -56,6 +56,13 @@
             color: initial;
         }
 
+        .btn,
+        .btn:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+
 
         .navbar-brand,
         .navbar-brand:hover {
@@ -65,7 +72,7 @@
             color: #fafcfd;
         }
 
-        .custom_nav-container {
+        .custom_nav-container .nav_search-btn {
             background-size: 22px;
             background-repeat: no-repeat;
             background-position-y: 7px;
@@ -105,7 +112,7 @@
             background-size: 55px;
         }
 
-        .quote_btn-container a, button {
+        .quote_btn-container a {
             display: inline-block;
             padding: 5px 15px;
             background-color: #fc5d35;

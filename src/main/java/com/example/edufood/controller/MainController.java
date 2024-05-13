@@ -22,12 +22,13 @@ public class MainController {
 
     @GetMapping("")
     public String main(Model model,
-                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC,  size = 10) Pageable pageable) {
+                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC,  size = 4) Pageable pageable) {
         Page<RestaurantDto> page = restaurantService.getAllRestaurants(pageable);
 
+        model.addAttribute("allRestaurantsSize", restaurantService.lengthRestaurants());
         model.addAttribute("page", page);
-        model.addAttribute("pageNumber", pageable.getPageNumber());
-        model.addAttribute("pageSize", pageable.getPageSize());
+        model.addAttribute("pageNumber", pageable.getPageNumber());;
+        model.addAttribute("maxPage", restaurantService.lengthRestaurants() / pageable.getPageSize());
         return "main/index";
     }
 }

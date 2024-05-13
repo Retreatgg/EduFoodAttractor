@@ -131,7 +131,6 @@
     </script>
 
     <div class="container">
-        <#assign maxPage = page.content?size / pageSize>
         <@p.pagination page=pageNumber maxPage=maxPage path="/"/>
     </div>
 </@main.layout>
