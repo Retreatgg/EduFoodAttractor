@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <p>${dish.description}</p>
-                                    <form action="/cart_order/${restaurant.id}/addToCart" method="post">
+                                    <form onsubmit="addToCart(${dish.id}); return false;">
                                         <input type="hidden" name="dishId" value="${dish.id}">
                                         <button type="submit" class="btn btn-primary">Добавить в корзину</button>
                                     </form>
@@ -144,4 +144,15 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function addToCart(dishId) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            cartItems.push({ dishId: dishId });
+
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
+    </script>
+
 </@main.layout>
