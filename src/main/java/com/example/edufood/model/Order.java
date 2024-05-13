@@ -27,6 +27,8 @@ public class Order {
 
     @Column(name = "created_date")
     private LocalDateTime createDate;
+
+    @Column(name = "check_restaurant")
     private Double check;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")

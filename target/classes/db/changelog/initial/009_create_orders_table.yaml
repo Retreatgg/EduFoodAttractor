@@ -33,7 +33,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: check
+                  name: check_restaurant
                   type: double
                   constraints:
                     nullable: false
