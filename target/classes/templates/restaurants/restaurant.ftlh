@@ -87,7 +87,7 @@
             <div class="section-content mb-5 mt-5">
                 <div class="row">
                     <div class="col-sm-5 img-bg d-flex shadow align-items-center justify-content-center justify-content-md-end img-2" style="background-image: url(img/hero-2.jpg);">
-
+                        <img class="img-fluid" src="/images/default/restaurant${restaurant.id}.jpeg" alt="logo">
                     </div>
                     <div class="col-sm-7 py-5 pl-md-0 pl-4">
                         <div class="heading-section pl-lg-5 ml-md-5">
@@ -120,7 +120,7 @@
                         <#list dishes as dish>
                             <div class="menus d-flex align-items-center">
                                 <div class="menu-img rounded-circle">
-                                    <img class="img-fluid" src="img/breakfast-1.jpg" alt="">
+                                    <img class="img-fluid" src="/images/default/dish${dish.id}.jpg" alt="">
                                 </div>
                                 <div class="text-wrap">
                                     <div class="row align-items-start">
