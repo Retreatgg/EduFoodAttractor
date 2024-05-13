@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <p>${dish.description}</p>
-                                    <form onsubmit="addToCart(${dish.id}, '${dish.name}'); return false;">
+                                    <form onsubmit="addToCart(${dish.id}, '${dish.name}', '${dish.price}'); return false;">
                                         <input type="hidden" name="dishId" value="${dish.id}">
                                         <button type="submit" class="btn btn-primary">Добавить в корзину</button>
                                     </form>
@@ -145,14 +145,33 @@
         </div>
     </section>
 
+
+    <#--модальное окно корзины-->
     <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="cartModalLabel">Ваша корзина</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#totalPriceModal">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <#--модальное окно корзины-->
+
+
+    <!--модальное окно для общего прайса -->
+    <div class="modal fade" id="totalPriceModal" tabindex="-1" role="dialog" aria-labelledby="totalPriceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="totalPriceModalLabel">Оформление заказа</h5>
                 </div>
                 <div class="modal-body">
 
@@ -164,29 +183,46 @@
             </div>
         </div>
     </div>
-
-
-
+    <!--модальное окно для общего прайса -->
 
     <script>
-        function addToCart(dishId, dishName) {
+        function addToCart(dishId, dishName, dishPrice) {
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-            cartItems.push({ dishId: dishId, dishName: dishName});
+            cartItems.push({ dishId: dishId, dishName: dishName, dishPrice});
 
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
 
         $(document).ready(function() {
+            function calculateTotalPrice(cartItems) {
+                let totalPrice = 0;
+                cartItems.forEach(function(item) {
+                    totalPrice += parseFloat(item.dishPrice);
+                });
+                return totalPrice.toFixed(2);
+            }
+
             $('.btn.btn-primary[data-toggle="modal"][data-target="#cartModal"]').click(function() {
                 let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
                 let modalBody = $('.modal-body');
                 modalBody.empty();
                 cartItems.forEach(function(item) {
-                    modalBody.append('<p>' + item.dishName + '</p>');
+                    modalBody.append('<p>' + item.dishName + ' - ' + item.dishPrice + '</p>');
                 });
             });
-        });
-    </script>
 
+            $('.btn.btn-primary[data-dismiss="modal"][data-toggle="modal"][data-target="#totalPriceModal"]').click(function() {
+                $('#cartModal').modal('hide');
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                let totalPrice = calculateTotalPrice(cartItems);
+                $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
+            });
+
+            $('#totalPriceModal .btn.btn-primary').click(function() {
+            });
+        });
+
+
+    </script>
 </@main.layout>
