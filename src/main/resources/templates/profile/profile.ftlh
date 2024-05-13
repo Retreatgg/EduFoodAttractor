@@ -1,137 +1,59 @@
 <#import "../layout.ftlh" as main>
 <@main.layout>
 
-    <style>
-        body {
-            background-color: black;
-        }
+     <style>
+         .container-title {
+             font-size: 24px;
+             font-weight: bold;
+             color: #2E3042;
+             margin-bottom: 20px;
+         }
 
-        .container {
-            width: 1200px !important;
-            padding: 0 !important;
-            margin-right: auto;
-            margin-left: auto;
+         .gradient-cards {
+             display: grid;
+             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+             grid-gap: 20px;
+         }
 
-            @media screen and (min-width: 992px) and (max-width: 1439px) {
-                max-width: 1279px !important;
-                padding: 0 !important;
-                margin: 0 80px !important;
-                width: auto !important;
-            }
+         .card {
+             background-color: #F7F7F7;
+             border-radius: 20px;
+             overflow: hidden;
+             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+             transition: transform 0.3s ease-in-out;
+         }
 
-            @media screen and (max-width: 991px) {
-                max-width: 959px !important;
-                margin: 0 16px !important;
-                padding: 0 !important;
-                width: auto !important;
-            }
-        }
+         .card:hover {
+             transform: translateY(-5px);
+         }
 
-        .gradient-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            padding: 30px;
-            @media screen and (max-width: 991px) {
-                grid-template-columns: 1fr;
-            }
-        }
+         .container-card {
+             padding: 20px;
+         }
 
-        .container-title {
-            text-align: center;
-            padding: 0 !important;
-            margin-bottom: 40px;
-            font-size: 40px;
-            color: #fff;
-            font-weight: 600;
-            line-height: 60px;
-        }
+         .card-title {
+             font-size: 20px;
+             font-weight: bold;
+             color: #2E3042;
+             margin-bottom: 10px;
+         }
 
-        .card {
-            max-width: 550px;
-            border: 0;
-            width: 100%;
-            margin-inline: auto;
-        }
+         .card-description {
+             font-size: 16px;
+             color: #6E7191;
+             margin-bottom: 5px;
+         }
 
-        .container-card {
-            position: relative;
-            border: 2px solid transparent;
-            background: linear-gradient(71deg, #080509, #1a171c, #080509);
-            background-clip: padding-box;
-            border-radius: 45px;
-            padding: 40px;
-            img {
-                margin-bottom: 32px;
-            }
-        }
-
-        .bg-green-box,
-        .bg-white-box,
-        .bg-yellow-box,
-        .bg-blue-box {
-            position: relative;
-        }
-
-        .bg-green-box::after,
-        .bg-white-box::after,
-        .bg-yellow-box::after,
-        .bg-blue-box::after {
-            position: absolute;
-            top: -1px;
-            bottom: -1px;
-            left: -1px;
-            right: -1px;
-            content: "";
-            z-index: -1;
-            border-radius: 45px;
-        }
-
-        .bg-green-box::after {
-            background: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
-        }
-
-        .bg-white-box::after {
-            background: linear-gradient(71deg, #121013, #b0afb0, #121013);
-        }
-
-        .bg-yellow-box::after {
-            background: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
-        }
-
-        .bg-blue-box::after {
-            background: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
-        }
-
-        .card-title {
-            font-weight: 600;
-            color: white;
-            letter-spacing: -0.02em;
-            line-height: 40px;
-            font-style: normal;
-            font-size: 28px;
-            padding-bottom: 8px;
-        }
-
-        .card-description {
-            font-weight: 600;
-            line-height: 32px;
-            color: hsla(0, 0%, 100%, 0.5);
-            font-size: 16px;
-            max-width: 470px;
-        }
-
-    </style>
+     </style>
 
     <div class="container">
-        <p class="container-title">Мои заказы</p>
+        <p class="container-title mt-5">Мои заказы</p>
 
         <div class="gradient-cards">
 
             <#list orders as order>
                 <div class="card">
                     <div class="container-card bg-white-box">
-                        <svg width="80" height="80" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1" width="118" height="118" rx="24" fill="url(#paint0_linear_1366_4565)" fill-opacity="0.15" stroke="url(#paint1_radial_1366_4565)" stroke-width="2"></rect>
                             <ellipse rx="21.9462" ry="22.2891" transform="matrix(0.964749 0.263173 -0.254526 0.967066 60.1463 63.0804)" stroke="white" stroke-width="1.00101" stroke-linecap="round" stroke-dasharray="4 5.01"></ellipse>
                             <ellipse rx="17.4359" ry="17.5832" transform="matrix(-1 0 0 1 60.1466 39.5834)" fill="white"></ellipse>

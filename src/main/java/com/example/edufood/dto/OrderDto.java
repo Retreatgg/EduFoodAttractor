@@ -12,7 +12,7 @@ public class OrderDto {
 
     private Long id;
     private Restaurant restaurant;
-    private LocalDateTime createDate;
+    private String createDate;
     private Double check;
 
 

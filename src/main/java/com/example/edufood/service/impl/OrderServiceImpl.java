@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
             dtos.add(OrderDto.builder()
                             .id(order.getId())
                             .check(order.getCheck())
-                            .createDate(order.getCreateDate())
+                            .createDate(order.getCreateDate().format(formatters))
                             .restaurant(order.getRestaurant())
                     .build());
         });

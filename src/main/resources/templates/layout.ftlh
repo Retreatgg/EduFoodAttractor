@@ -24,18 +24,18 @@
             background-color: #f7f7f7;
         }
 
-        .hero_area.sub_pages {
+        .hero_area {
             height: auto;
         }
 
         .header_section {}
 
-        .header_section .container-fluid {
+        .header_section {
             padding-right: 25px;
             padding-left: 25px;
         }
 
-        .header_section .nav_container {
+        .header_section {
             margin: 0 auto;
         }
 
@@ -151,7 +151,7 @@
                         </form>
                     </div>
                     <div class="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center ms-auto">
-                        <a href="">
+                        <a href="/profile">
                             profile
                         </a>
                     </div>
