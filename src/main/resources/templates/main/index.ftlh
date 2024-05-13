@@ -39,29 +39,96 @@
 
     <section class="fruit_section bg-light">
         <div class="container">
+
+            <div class="search-container">
+                <input autocomplete="off" type="search" id="search" class="search-input" placeholder="Поиск ресторана" />
+                <div class="quote_btn-container">
+                    <button class="search-button " type="button">
+                        Поиск
+                    </button>
+                </div>
+            </div>
+
             <h2 class="custom_heading mt-5 text-center">Рестораны</h2>
             <p class="custom_heading-text text-center">
-                Вы здесь можете видеть наших ресторанов и в каждом из них вы можете сделать доставку домой!
+                Добро пожаловать в наши рестораны! Наслаждайтесь нашими блюдами и возможностью доставки домой.
             </p>
-            <div class="row">
-                <#list page.getContent() as restauran>
-                    <div class="col-md-8">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">${restauran.name}</h5>
-                                <p class="card-text">${restauran.description}</p>
-                                <a href="/restaurant/${restauran.id}" class="btn btn-dark">Перейти</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <img src="images/orange.png" class="card-img-top" alt="...">
-                    </div>
-                </#list>
+            <div class="row col-md-8 search-results" id="results">
             </div>
         </div>
     </section>
+
+
+
+    <script>
+
+        const restaurants = [
+            <#list page.getContent() as restaurant>
+            {
+                name: '${restaurant.name?js_string}',
+                id: '${restaurant.id?js_string}',
+                description: '${restaurant.description?js_string}'
+            },
+            </#list>
+        ];
+
+        const search = document.getElementById("search");
+        const results = document.getElementById("results");
+        let search_term = "";
+
+        search.addEventListener("input", (event) => {
+            search_term = event.target.value.toLowerCase();
+            showList();
+        });
+
+        const showList = () => {
+            results.innerHTML = "";
+
+            const filteredRestaurants = restaurants.filter((item) => {
+                return item.name.toLowerCase().includes(search_term);
+            });
+
+            const listItems = filteredRestaurants.map((item) => {
+                const mainDiv = document.createElement('div');
+                mainDiv.classList.add('col-md-8')
+                const div = document.createElement("div");
+                div.classList.add('card', 'mb-4');
+
+                const cardBody = document.createElement("div");
+                cardBody.classList.add('card-body');
+
+                const title = document.createElement("h5");
+                title.classList.add('card-title');
+                title.textContent = item.name;
+
+                const description = document.createElement("p");
+                description.classList.add('card-text');
+                description.textContent = item.description;
+
+                const linkContainer = document.createElement("div");
+
+                const link = document.createElement("a");
+                link.href = '/restaurant/' + item.id;
+                link.classList.add('btn', 'btn-dark');
+                link.textContent = "Посмотреть меню";
+
+                linkContainer.appendChild(link);
+                cardBody.appendChild(title);
+                cardBody.appendChild(description);
+                cardBody.appendChild(linkContainer);
+                div.appendChild(cardBody);
+                mainDiv.appendChild(div)
+
+                return mainDiv;
+            });
+
+            listItems.forEach((li) => {
+                results.appendChild(li);
+            });
+        };
+
+        showList();
+    </script>
 
     <div class="container">
         <#assign maxPage = page.content?size / pageSize>

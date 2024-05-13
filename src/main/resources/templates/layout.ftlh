@@ -39,7 +39,7 @@
             margin: 0 auto;
         }
 
-        .custom_nav-container.navbar-expand-lg .navbar-nav .nav-link {
+        .custom_nav-container.navbar-expand-lg  {
             padding: 10px 30px;
             color: #343434;
             text-align: center
@@ -56,13 +56,6 @@
             color: initial;
         }
 
-        .btn,
-        .btn:focus {
-            outline: none !important;
-            box-shadow: none;
-        }
-
-
 
         .navbar-brand,
         .navbar-brand:hover {
@@ -72,7 +65,7 @@
             color: #fafcfd;
         }
 
-        .custom_nav-container .nav_search-btn {
+        .custom_nav-container {
             background-size: 22px;
             background-repeat: no-repeat;
             background-position-y: 7px;
@@ -112,7 +105,7 @@
             background-size: 55px;
         }
 
-        .quote_btn-container a {
+        .quote_btn-container a, button {
             display: inline-block;
             padding: 5px 15px;
             background-color: #fc5d35;
@@ -140,16 +133,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="d-flex ms-auto flex-column flex-lg-row align-items-center">
-                        <ul class="navbar-nav  ">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                        </ul>
-                        <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-                            <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"><img src="/images/default/search-icon.png" alt="search"/></button>
-                        </form>
-                    </div>
                     <div class="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center ms-auto">
                         <a href="/profile">
                             profile

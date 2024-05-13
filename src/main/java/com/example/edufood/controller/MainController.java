@@ -22,7 +22,7 @@ public class MainController {
 
     @GetMapping("")
     public String main(Model model,
-                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC,  size = 5) Pageable pageable) {
+                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC,  size = 10) Pageable pageable) {
         Page<RestaurantDto> page = restaurantService.getAllRestaurants(pageable);
 
         model.addAttribute("page", page);
