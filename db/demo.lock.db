@@ -1,6 +1,6 @@
 #FileLock
-#Mon May 13 15:49:30 KGT 2024
-hostName=localhost
-id=18f6921a24332e9d729e53d74b8fbee73113164db52
+#Mon May 13 10:43:19 UTC 2024
+hostName=DESKTOP-FM6F578
+id=18f718ca64ac7d62fed13e3814a83e5211b422f9336
 method=file
-server=localhost\:65043
+server=26.68.100.87\:65475

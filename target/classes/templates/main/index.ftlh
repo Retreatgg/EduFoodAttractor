@@ -40,28 +40,26 @@
     <section class="fruit_section bg-light">
         <div class="container">
 
-            <div class="search-container">
-                <input autocomplete="off" type="search" id="search" class="search-input" placeholder="Поиск ресторана" />
+            <div class="search-container mb-5">
+                <input autocomplete="off" type="search" id="search" class="search-input form-control" placeholder="Поиск ресторана" />
                 <div class="quote_btn-container">
-                    <button class="search-button " type="button">
+                    <button class="search-button btn btn-dark" type="button">
                         Поиск
                     </button>
                 </div>
             </div>
 
-            <h2 class="custom_heading mt-5 text-center">Рестораны</h2>
+            <h2 class="custom_heading mt-3 text-center">Рестораны</h2>
             <p class="custom_heading-text text-center">
-                Добро пожаловать в наши рестораны! Наслаждайтесь нашими блюдами и возможностью доставки домой.
+                Добро пожалойте в наши рестораны! Наслаждайтесь нашими блюдами и возможностью доставки домой.
             </p>
-            <div class="row col-md-8 search-results" id="results">
+            <div class="row row-cols-1 row-cols-md-2 g-4" id="results">
             </div>
         </div>
     </section>
 
 
-
     <script>
-
         const restaurants = [
             <#list page.getContent() as restaurant>
             {
@@ -89,41 +87,42 @@
             });
 
             const listItems = filteredRestaurants.map((item) => {
-                const mainDiv = document.createElement('div');
-                mainDiv.classList.add('col-md-8')
-                const div = document.createElement("div");
-                div.classList.add('card', 'mb-4');
+                const card = document.createElement("div");
+                card.classList.add('col', 'card', 'mb-4', 'd-flex', 'flex-column', 'h-100');
+
+                const cardImage = document.createElement("img");
+                cardImage.src = '/images/default/restaurant' + item.id + '.jpeg';
+                cardImage.classList.add('card-img-top', 'img-fluid');
+                cardImage.alt = "Логотип ресторана";
 
                 const cardBody = document.createElement("div");
-                cardBody.classList.add('card-body');
+                cardBody.classList.add('card-body', 'flex-grow-1', 'd-flex', 'flex-column', 'justify-content-end');
 
-                const title = document.createElement("h5");
-                title.classList.add('card-title');
-                title.textContent = item.name;
+                const cardTitle = document.createElement("h5");
+                cardTitle.classList.add('card-title');
+                cardTitle.textContent = item.name;
 
-                const description = document.createElement("p");
-                description.classList.add('card-text');
-                description.textContent = item.description;
+                const cardText = document.createElement("p");
+                cardText.classList.add('card-text');
+                cardText.textContent = item.description;
 
-                const linkContainer = document.createElement("div");
+                const cardLink = document.createElement("a");
+                cardLink.href = '/restaurant/' + item.id;
+                cardLink.classList.add('btn', 'btn-dark', 'mt-auto');
+                cardLink.textContent = 'Перейти в ресторан'
 
-                const link = document.createElement("a");
-                link.href = '/restaurant/' + item.id;
-                link.classList.add('btn', 'btn-dark');
-                link.textContent = "Посмотреть меню";
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                cardBody.appendChild(cardLink);
 
-                linkContainer.appendChild(link);
-                cardBody.appendChild(title);
-                cardBody.appendChild(description);
-                cardBody.appendChild(linkContainer);
-                div.appendChild(cardBody);
-                mainDiv.appendChild(div)
+                card.appendChild(cardImage);
+                card.appendChild(cardBody);
 
-                return mainDiv;
+                return card;
             });
 
-            listItems.forEach((li) => {
-                results.appendChild(li);
+            listItems.forEach((card) => {
+                results.appendChild(card);
             });
         };
 
