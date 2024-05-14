@@ -18,7 +18,7 @@ databaseChangeLog:
                   type: long
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_user_id
+                    foreignKeyName: fk_user_order_id
                     references: users(id)
               - column:
                   name: restaurant_id

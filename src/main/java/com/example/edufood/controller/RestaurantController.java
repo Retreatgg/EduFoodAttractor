@@ -27,11 +27,7 @@ public class RestaurantController {
     public String getRestaurant(Authentication auth, Model model, @PathVariable Long id) {
         model.addAttribute("restaurant", restaurantService.getRestaurantById(id));
         model.addAttribute("dishes", dishService.getDishesByRestaurantId(id));
-
-        if(auth != null) {
-            User user = userUtil.getUserByAuth(auth);
-            model.addAttribute("basket", cartOrderService.findByRestauranIdAndUserId(user.getId(), id));
-        }
+        model.addAttribute("basket", true);
         return "restaurants/restaurant";
     }
 }
