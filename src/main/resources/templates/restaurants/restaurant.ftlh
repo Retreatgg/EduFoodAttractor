@@ -132,14 +132,7 @@
                                         </div>
                                     </div>
                                     <p>${dish.description}</p>
-                                    <form onsubmit="addToCart(${restaurant.id}, '${restaurant.name}', ${dish.id}, '${dish.name}', '${dish.price}'); return false;">
-                                        <input type="hidden" name="restaurantId" value="${restaurant.id}">
-                                        <input type="hidden" name="restaurantName" value="${restaurant.name}">
-                                        <input type="hidden" name="dishId" value="${dish.id}">
-                                        <input type="hidden" name="dishName" value="${dish.name}">
-                                        <input type="hidden" name="dishPrice" value="${dish.price}">
-                                        <button type="submit" class="btn btn-primary">Добавить в корзину</button>
-                                    </form>
+                                    <button type="button" class="btn btn-primary" onclick="addToCart(${restaurant.id}, '${restaurant.name}', ${dish.id}, '${dish.name}', '${dish.price}');">Добавить в корзину</button>
                                 </div>
                             </div>
                         </#list>
@@ -198,13 +191,24 @@
 
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-            $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').addClass('added-to-cart').text('Добавлено');
+            let addButton = event.target;
+            addButton.innerHTML = "Добавлено";
 
             setTimeout(function() {
-                $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').removeClass('added-to-cart').text('Добавить в корзину');
+                addButton.innerHTML = "Добавить в корзину";
             }, 1000);
-        }
 
+            $.ajax({
+                url: '/' + restaurantId + '/addToCart',
+                type: 'POST',
+                data: { dishId: dishId },
+                success: function(response) {
+                },
+                error: function(xhr, status, error) {
+
+                }
+            });
+        }
 
         $(document).ready(function() {
             function displayCartItems(cartItems) {
@@ -250,9 +254,16 @@
             });
         });
 
-        function clearCart() {
+        function clearCart(restaurantId) {
             localStorage.removeItem('cartItems');
-            $.post('/{restaurantId}/clearCart', function() {
+            $.ajax({
+                url: '/' + restaurantId + '/clearCart',
+                type: 'POST',
+                success: function(response) {
+                },
+                error: function(xhr, status, error) {
+
+                }
             });
         }
 
