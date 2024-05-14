@@ -31,7 +31,6 @@ public class SecurityConfig {
                          .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                          .permitAll())
                  .authorizeHttpRequests(authorize -> authorize
-                         .requestMatchers(HttpMethod.GET, "/").hasAuthority("CUSTOMER")
                          .requestMatchers("HttpMethod.GET", "/profile").hasAuthority("CUSTOMER")
                          .anyRequest().permitAll())
                  .exceptionHandling(Customizer.withDefaults());

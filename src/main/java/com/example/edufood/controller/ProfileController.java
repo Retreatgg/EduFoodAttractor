@@ -29,7 +29,6 @@ public class ProfileController {
     public String profile(Authentication authentication, Model model) {
         User user = userUtil.getUserByAuth(authentication);
         List<OrderDto> orderDtoList = orderService.ordersByUserId(user);
-        orderDtoList.sort(Comparator.comparing(OrderDto::getCreateDate));
 
         model.addAttribute("user", user);
         model.addAttribute("orders", orderDtoList);

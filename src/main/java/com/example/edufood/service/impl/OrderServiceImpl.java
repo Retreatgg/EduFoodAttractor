@@ -6,10 +6,12 @@ import com.example.edufood.model.User;
 import com.example.edufood.repository.OrderRepository;
 import com.example.edufood.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,6 +25,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> ordersByUserId(User user) {
         List<Order> orders = orderRepository.findByUser(user);
+        orders.sort(Comparator.comparing(Order::getCreateDate));
         return transformListModelForDto(orders);
     }
 

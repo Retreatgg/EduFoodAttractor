@@ -15,7 +15,7 @@ public class ImageServiceImpl implements ImageService {
     private final FileUtil fileUtil;
 
     @Override
-    public ResponseEntity<?> downloadDefaultPhoto(String namePhot) {
-        return fileUtil.getOutputFile(namePhot, "/images", MediaType.IMAGE_JPEG);
+    public ResponseEntity<?> downloadDefaultPhoto(String namePhoto) {
+        return fileUtil.getOutputFile(namePhoto, "/images", MediaType.IMAGE_JPEG);
     }
 }
