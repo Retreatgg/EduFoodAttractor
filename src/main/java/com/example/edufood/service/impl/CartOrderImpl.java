@@ -40,7 +40,7 @@ public class CartOrderImpl implements CartOrderService {
     }
 
     @Override
-    public void removeFromCart(Long cartOrderId) {
+    public void clearCart(Long cartOrderId) {
         CartOrders cartOrder = cartOrdersRepository.findById(cartOrderId)
                 .orElseThrow(() -> new RuntimeException("Cart Order not found"));
 

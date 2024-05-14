@@ -132,8 +132,12 @@
                                         </div>
                                     </div>
                                     <p>${dish.description}</p>
-                                    <form onsubmit="addToCart(${dish.id}, '${dish.name}', '${dish.price}'); return false;">
+                                    <form onsubmit="addToCart(${restaurant.id}, '${restaurant.name}', ${dish.id}, '${dish.name}', '${dish.price}'); return false;">
+                                        <input type="hidden" name="restaurantId" value="${restaurant.id}">
+                                        <input type="hidden" name="restaurantName" value="${restaurant.name}">
                                         <input type="hidden" name="dishId" value="${dish.id}">
+                                        <input type="hidden" name="dishName" value="${dish.name}">
+                                        <input type="hidden" name="dishPrice" value="${dish.price}">
                                         <button type="submit" class="btn btn-primary">Добавить в корзину</button>
                                     </form>
                                 </div>
@@ -158,6 +162,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#totalPriceModal">Оформить заказ</button>
                 </div>
             </div>
@@ -184,44 +189,62 @@
     </div>
     <!--модальное окно для общего прайса -->
 
-    <script>
-        function addToCart(dishId, dishName, dishPrice) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-            cartItems.push({ dishId: dishId, dishName: dishName, dishPrice});
+<script>
+    function addToCart(restaurantId, restaurantName, dishId, dishName, dishPrice) {
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        cartItems.push({ restaurantId: restaurantId, restaurantName: restaurantName, dishId: dishId, dishName: dishName, dishPrice: dishPrice });
+
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+    $(document).ready(function() {
+        function displayCartItems(cartItems) {
+            let modalBody = $('.modal-body');
+            modalBody.empty();
+            cartItems.forEach(function(item) {
+                modalBody.append('<h5>' + item.restaurantName + '</h5>');
+                modalBody.append('<p>' + item.dishName + ' - ' + item.dishPrice + '</p>');
+            });
         }
 
-        $(document).ready(function() {
-            function calculateTotalPrice(cartItems) {
-                let totalPrice = 0;
-                cartItems.forEach(function(item) {
-                    totalPrice += parseFloat(item.dishPrice);
-                });
-                return totalPrice.toFixed(2);
-            }
-
-            $('.btn.btn-primary[data-toggle="modal"][data-target="#cartModal"]').click(function() {
-                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-                let modalBody = $('.modal-body');
-                modalBody.empty();
-                cartItems.forEach(function(item) {
-                    modalBody.append('<p>' + item.dishName + ' - ' + item.dishPrice + '</p>');
-                });
+        function calculateTotalPrice(cartItems) {
+            let totalPrice = 0;
+            cartItems.forEach(function(item) {
+                totalPrice += parseFloat(item.dishPrice);
             });
+            clearCart();
+            return totalPrice.toFixed(2);
+        }
 
-            $('.btn.btn-primary[data-dismiss="modal"][data-toggle="modal"][data-target="#totalPriceModal"]').click(function() {
-                $('#cartModal').modal('hide');
-                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-                let totalPrice = calculateTotalPrice(cartItems);
-                $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
-            });
+
+        $('.btn.btn-primary[data-toggle="modal"][data-target="#cartModal"]').click(function() {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            displayCartItems(cartItems);
+        });
+
+        $('.btn.btn-primary[data-dismiss="modal"][data-toggle="modal"][data-target="#totalPriceModal"]').click(function() {
+            $('#cartModal').modal('hide');
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let totalPrice = calculateTotalPrice(cartItems);
+            $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
 
             $('#totalPriceModal .btn.btn-primary').click(function() {
+
             });
         });
 
+        $('#totalPriceModal .btn.btn-primary').click(function() {
 
-    </script>
+        });
+    });
+
+    function clearCart() {
+        localStorage.removeItem('cartItems');
+        $.post('/{restaurantId}/clearCart', function() {
+        });
+    }
+
+</script>
 </@main.layout>
