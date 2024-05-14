@@ -30,6 +30,7 @@ public class ProfileController {
         User user = userUtil.getUserByAuth(authentication);
         List<OrderDto> orderDtoList = orderService.ordersByUserId(user);
 
+        model.addAttribute("auth", authentication);
         model.addAttribute("user", user);
         model.addAttribute("orders", orderDtoList);
 
