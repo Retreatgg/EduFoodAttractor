@@ -3,7 +3,6 @@ package com.example.edufood.controller;
 import com.example.edufood.dto.CartOrderDto;
 import com.example.edufood.service.CartOrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +19,12 @@ public class CartOrderController {
                 .dishId(dishId)
                 .build();
         cartOrderService.addToCart(cartOrderDto);
+        return "redirect:/";
+    }
+
+    @PostMapping("{restaurantId}/clearCart")
+    public String clearCart(@PathVariable Long restaurantId) {
+        cartOrderService.clearCart(restaurantId);
         return "redirect:/";
     }
 }
