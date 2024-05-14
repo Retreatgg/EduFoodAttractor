@@ -146,7 +146,7 @@
     </section>
 
 
-    <#--модальное окно корзины-->
+<#--модальное окно корзины-->
     <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -163,7 +163,7 @@
             </div>
         </div>
     </div>
-    <#--модальное окно корзины-->
+<#--модальное окно корзины-->
 
 
     <!--модальное окно для общего прайса -->
