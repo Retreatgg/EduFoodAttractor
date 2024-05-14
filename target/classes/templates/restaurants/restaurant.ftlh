@@ -236,7 +236,7 @@
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
             if(cartItems.length === 0) {
                 alert("Ваша корзина пуста. Пожалуйста, добавьте товары перед оформлением заказа.");
-                return false; // Предотвращает дальнейшее выполнение кода
+                return false;
             }
             let totalPrice = calculateTotalPrice(cartItems);
             $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
@@ -244,7 +244,6 @@
             $('#totalPriceModal .btn.btn-primary').click(function() {
             });
         });
-
 
         $('#totalPriceModal .btn.btn-primary').click(function() {
 
