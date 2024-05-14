@@ -19,7 +19,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder encoder;
 
 
@@ -42,6 +41,11 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         userRepository.save(newUser);
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id).get();
     }
 
 

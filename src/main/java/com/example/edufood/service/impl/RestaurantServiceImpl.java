@@ -60,6 +60,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.findAll().size();
     }
 
+    @Override
+    public Restaurant findRestaurantById(Long id) {
+        return restaurantRepository.findById(id).get();
+    }
+
     private List<RestaurantDto> transformListModelForDtos(List<Restaurant> restaurants) {
         List<RestaurantDto> dtos = new ArrayList<>();
 

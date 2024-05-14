@@ -163,7 +163,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#totalPriceModal">Оформить заказ</button>
+                    <button type="button" onclick="addOrder()" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#totalPriceModal">Оформить заказ</button>
                 </div>
             </div>
         </div>
@@ -256,5 +256,29 @@
             });
         }
 
+
+        async function addOrder() {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            console.log(JSON.stringify(cartItems));
+
+            try {
+                let response = await fetch('/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(cartItems)
+                });
+
+                if (response.ok) {
+                    console.log('Заказ успешно добавлен');
+                    clearCart();
+                } else {
+                    console.error('Ошибка при добавлении заказа');
+                }
+            } catch (error) {
+                console.error('Произошла ошибка:', error);
+            }
+        }
     </script>
 </@main.layout>

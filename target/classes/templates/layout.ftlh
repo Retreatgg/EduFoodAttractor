@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>EduFood</title>
         <link rel="stylesheet" type="text/css"
-              href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"/>
         <link href="../css/style.css" rel="stylesheet"/>
 
@@ -28,7 +28,8 @@
                 height: auto;
             }
 
-            .header_section {}
+            .header_section {
+            }
 
             .header_section {
                 padding-right: 25px;
@@ -61,7 +62,6 @@
                 outline: none !important;
                 box-shadow: none;
             }
-
 
 
             .navbar-brand,
@@ -143,25 +143,25 @@
                         <ul class="navbar-nav">
                             <#if auth??>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/profile">Profile</a>
+                                    <a class="nav-link" href="/profile">Профиль</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/logout">Logout</a>
+                                    <a class="nav-link" href="/logout">Выйти</a>
                                 </li>
                             <#else>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/auth/login">Login</a>
+                                    <a class="nav-link" href="/auth/login">Логин</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/auth/register">Register</a>
+                                    <a class="nav-link" href="/auth/register">Регистрация</a>
                                 </li>
                             </#if>
                         </ul>
                     </div>
                     <#if basket??>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cartModal">
-                                Ваша корзина
-                            </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cartModal">
+                            Ваша корзина
+                        </button>
                     </#if>
                 </nav>
             </div>

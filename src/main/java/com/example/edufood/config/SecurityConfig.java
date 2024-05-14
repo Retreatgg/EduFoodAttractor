@@ -32,6 +32,7 @@ public class SecurityConfig {
                          .permitAll())
                  .authorizeHttpRequests(authorize -> authorize
                          .requestMatchers("HttpMethod.GET", "/profile").hasAuthority("CUSTOMER")
+                         .requestMatchers("HttpMethod.POST", "/order/").hasAuthority("CUSTOMER")
                          .anyRequest().permitAll())
                  .exceptionHandling(Customizer.withDefaults());
 

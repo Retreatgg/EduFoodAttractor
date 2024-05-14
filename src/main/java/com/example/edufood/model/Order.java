@@ -1,8 +1,7 @@
 package com.example.edufood.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,7 +9,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "orders")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
