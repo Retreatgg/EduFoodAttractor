@@ -20,6 +20,10 @@ public class CartOrders {
     private Restaurant restaurant;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "dish_id")
     private Dish dish;
 }

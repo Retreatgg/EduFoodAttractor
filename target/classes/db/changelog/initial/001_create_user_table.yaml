@@ -23,9 +23,6 @@ databaseChangeLog:
                   name: password
                   type: varchar(75)
               - column:
-                  name: avatar
-                  type: varchar(255)
-              - column:
                   name: phone_number
                   type: varchar(100)
               - column:

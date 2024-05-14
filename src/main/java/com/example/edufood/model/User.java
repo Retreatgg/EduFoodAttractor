@@ -27,7 +27,6 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
-    private String avatar;
     private Boolean enabled;
 
     @Column(name = "account_type")
@@ -38,5 +37,8 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Order> orders;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<CartOrders> cartOrders;
 
 }

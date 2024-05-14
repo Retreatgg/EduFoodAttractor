@@ -11,6 +11,5 @@ public class DishDto {
     private Long id;
     private String name;
     private String description;
-    private String image;
     private Double price;
 }

@@ -30,6 +30,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    public Page<RestaurantDto> getAllRestaurants(Pageable pageable, String restaurantName) {
+        Page<Restaurant> restaurants = restaurantRepository.findAllByNameContainingIgnoreCase(restaurantName, pageable);
+        List<Restaurant> restaurantList = restaurants.getContent();
+        return new PageImpl<>(transformListModelForDtos(restaurantList));
+    }
+
+    @Override
+
     public RestaurantDto getRestaurantById(Long id) {
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
         if(restaurantOptional.isPresent()) {
@@ -39,6 +47,12 @@ public class RestaurantServiceImpl implements RestaurantService {
         String error = "Ресторан не найден с таким ID: " + id;
         log.error(error);
         throw new IllegalArgumentException(error);
+    }
+
+    @Override
+    public List<RestaurantDto> allRestaurants() {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        return transformListModelForDtos(restaurants);
     }
 
     @Override

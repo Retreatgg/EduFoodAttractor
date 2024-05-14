@@ -29,7 +29,6 @@ public class DishServiceImpl implements DishService {
         dishes.forEach(dish -> {
             dtos.add(DishDto.builder()
                             .id(dish.getId())
-                            .image(dish.getImage())
                             .description(dish.getDescription())
                             .name(dish.getName())
                             .price(dish.getPrice())

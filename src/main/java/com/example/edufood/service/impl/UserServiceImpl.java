@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
-                .avatar("unnamed.jpg")
                 .accountTypeId(1L)
                 .build();
 

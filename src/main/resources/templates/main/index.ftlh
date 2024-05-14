@@ -41,95 +41,60 @@
         <div class="container">
 
             <div class="search-container mb-5">
-                <input autocomplete="off" type="search" id="search" class="search-input form-control" placeholder="Поиск ресторана" />
-                <div class="quote_btn-container">
-                    <button class="search-button btn btn-dark" type="button">
-                        Поиск
-                    </button>
-                </div>
+                <form action="/" method="GET">
+                    <input autocomplete="off" type="search" id="search" name="restaurantName"
+                           class="search-input form-control" placeholder="Поиск ресторана" value="${restaurantName!}"/>
+                    <div class="quote_btn-container">
+                        <button class="search-button btn btn-dark" type="submit">
+                            Поиск
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <h2 class="custom_heading mt-3 text-center">Рестораны</h2>
             <p class="custom_heading-text text-center">
                 Добро пожалойте в наши рестораны! Наслаждайтесь нашими блюдами и возможностью доставки домой.
             </p>
-            <div class="row row-cols-1 row-cols-md-2 g-4" id="results">
-            </div>
+
+            <#if page.getSize() lt 1>
+                <h5>Увы! Ресторанов с таким названием не нашли!</h5>
+            <#else>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <#list page.getContent() as restaurant>
+                        <div class="col">
+                            <div class="card">
+                                <img src="/images/default/restaurant${restaurant.id}.jpeg" class="card-img-top"
+                                     alt="${restaurant.name}">
+                                <div class="card-body flex-grow-1 d-flex flex-column justify-content-end">
+                                    <h5 class="card-title">${restaurant.name}</h5>
+                                    <p class="card-text">${restaurant.description}</p>
+                                    <a href="/restaurant/${restaurant.id}" class="btn btn-dark mt-auto">Перейти в
+                                        ресторан</a>
+                                </div>
+                            </div>
+                        </div>
+                    </#list>
+                </div>
+            </#if>
+        </div>
         </div>
     </section>
 
-
-    <script>
-        const restaurants = [
-            <#list page.getContent() as restaurant>
-            {
-                name: '${restaurant.name?js_string}',
-                id: '${restaurant.id?js_string}',
-                description: '${restaurant.description?js_string}'
-            },
-            </#list>
-        ];
-
-        const search = document.getElementById("search");
-        const results = document.getElementById("results");
-        let search_term = "";
-
-        search.addEventListener("input", (event) => {
-            search_term = event.target.value.toLowerCase();
-            showList();
-        });
-
-        const showList = () => {
-            results.innerHTML = "";
-
-            const filteredRestaurants = restaurants.filter((item) => {
-                return item.name.toLowerCase().includes(search_term);
-            });
-
-            const listItems = filteredRestaurants.map((item) => {
-                const card = document.createElement("div");
-                card.classList.add('col', 'card', 'mb-4', 'd-flex', 'flex-column', 'h-100');
-
-                const cardImage = document.createElement("img");
-                cardImage.src = '/images/default/restaurant' + item.id + '.jpeg';
-                cardImage.classList.add('card-img-top', 'img-fluid');
-                cardImage.alt = "Логотип ресторана";
-
-                const cardBody = document.createElement("div");
-                cardBody.classList.add('card-body', 'flex-grow-1', 'd-flex', 'flex-column', 'justify-content-end');
-
-                const cardTitle = document.createElement("h5");
-                cardTitle.classList.add('card-title');
-                cardTitle.textContent = item.name;
-
-                const cardText = document.createElement("p");
-                cardText.classList.add('card-text');
-                cardText.textContent = item.description;
-
-                const cardLink = document.createElement("a");
-                cardLink.href = '/restaurant/' + item.id;
-                cardLink.classList.add('btn', 'btn-dark', 'mt-auto');
-                cardLink.textContent = 'Перейти в ресторан';
-
-                cardBody.appendChild(cardTitle);
-                cardBody.appendChild(cardText);
-                cardBody.appendChild(cardLink);
-
-                card.appendChild(cardImage);
-                card.appendChild(cardBody);
-
-                return card;
-            });
-
-            listItems.forEach((card) => {
-                results.appendChild(card);
-            });
-        };
-
-        showList();
-    </script>
-
     <div class="container">
-        <@p.pagination page=pageNumber maxPage=maxPage path="/"/>
+        <#if restaurantName??>
+            <@p.pagination page=pageNumber maxPage=maxPage path="/" restaurantName=restaurantName/>
+        <#else>
+            <@p.pagination page=pageNumber maxPage=maxPage path="/" restaurantName=""/>
+        </#if>
     </div>
+
+
+    <style>
+
+        .card{
+            height: 950px;
+        }
+
+    </style>
 </@main.layout>
