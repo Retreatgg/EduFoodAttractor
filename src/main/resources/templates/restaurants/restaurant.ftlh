@@ -197,7 +197,14 @@
         cartItems.push({ restaurantId: restaurantId, restaurantName: restaurantName, dishId: dishId, dishName: dishName, dishPrice: dishPrice });
 
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+        $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').addClass('added-to-cart').text('Добавлено');
+
+        setTimeout(function() {
+            $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').removeClass('added-to-cart').text('Добавить в корзину');
+        }, 1000);
     }
+
 
     $(document).ready(function() {
         function displayCartItems(cartItems) {
