@@ -234,13 +234,17 @@
         $('.btn.btn-primary[data-dismiss="modal"][data-toggle="modal"][data-target="#totalPriceModal"]').click(function() {
             $('#cartModal').modal('hide');
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            if(cartItems.length === 0) {
+                alert("Ваша корзина пуста. Пожалуйста, добавьте товары перед оформлением заказа.");
+                return false; // Предотвращает дальнейшее выполнение кода
+            }
             let totalPrice = calculateTotalPrice(cartItems);
             $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
 
             $('#totalPriceModal .btn.btn-primary').click(function() {
-
             });
         });
+
 
         $('#totalPriceModal .btn.btn-primary').click(function() {
 
