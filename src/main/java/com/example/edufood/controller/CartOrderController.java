@@ -3,6 +3,7 @@ package com.example.edufood.controller;
 import com.example.edufood.dto.CartOrderDto;
 import com.example.edufood.service.CartOrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,18 +14,20 @@ import org.springframework.web.bind.annotation.*;
 public class CartOrderController {
     private final CartOrderService cartOrderService;
     @PostMapping("{restaurantId}/addToCart")
-    public String addToCart(@RequestParam Long dishId, @PathVariable Long restaurantId) {
+    @ResponseBody
+    public ResponseEntity<String> addToCart(@RequestParam Long dishId, @PathVariable Long restaurantId) {
         CartOrderDto cartOrderDto = CartOrderDto.builder()
                 .restaurantId(restaurantId)
                 .dishId(dishId)
                 .build();
         cartOrderService.addToCart(cartOrderDto);
-        return "redirect:/";
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("{restaurantId}/clearCart")
-    public String clearCart(@PathVariable Long restaurantId) {
+    @ResponseBody
+    public ResponseEntity<String> clearCart(@PathVariable Long restaurantId) {
         cartOrderService.clearCart(restaurantId);
-        return "redirect:/";
+        return ResponseEntity.ok().build();
     }
 }
