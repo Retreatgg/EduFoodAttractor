@@ -190,72 +190,71 @@
     <!--модальное окно для общего прайса -->
 
 
-<script>
-    function addToCart(restaurantId, restaurantName, dishId, dishName, dishPrice) {
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    <script>
+        function addToCart(restaurantId, restaurantName, dishId, dishName, dishPrice) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-        cartItems.push({ restaurantId: restaurantId, restaurantName: restaurantName, dishId: dishId, dishName: dishName, dishPrice: dishPrice });
+            cartItems.push({ restaurantId: restaurantId, restaurantName: restaurantName, dishId: dishId, dishName: dishName, dishPrice: dishPrice });
 
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-        $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').addClass('added-to-cart').text('Добавлено');
+            $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').addClass('added-to-cart').text('Добавлено');
 
-        setTimeout(function() {
-            $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').removeClass('added-to-cart').text('Добавить в корзину');
-        }, 1000);
-    }
-
-
-    $(document).ready(function() {
-        function displayCartItems(cartItems) {
-            let modalBody = $('.modal-body');
-            modalBody.empty();
-            cartItems.forEach(function(item) {
-                modalBody.append('<h5>' + item.restaurantName + '</h5>');
-                modalBody.append('<p>' + item.dishName + ' - ' + item.dishPrice + '</p>');
-            });
-        }
-
-        function calculateTotalPrice(cartItems) {
-            let totalPrice = 0;
-            cartItems.forEach(function(item) {
-                totalPrice += parseFloat(item.dishPrice);
-            });
-            clearCart();
-            return totalPrice.toFixed(2);
+            setTimeout(function() {
+                $('[name="dishId"][value="' + dishId + '"]').siblings('.btn-primary').removeClass('added-to-cart').text('Добавить в корзину');
+            }, 1000);
         }
 
 
-        $('.btn.btn-primary[data-toggle="modal"][data-target="#cartModal"]').click(function() {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            displayCartItems(cartItems);
-        });
-
-        $('.btn.btn-primary[data-dismiss="modal"][data-toggle="modal"][data-target="#totalPriceModal"]').click(function() {
-            $('#cartModal').modal('hide');
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            if(cartItems.length === 0) {
-                alert("Ваша корзина пуста. Пожалуйста, добавьте товары перед оформлением заказа.");
-                return false; // Предотвращает дальнейшее выполнение кода
+        $(document).ready(function() {
+            function displayCartItems(cartItems) {
+                let modalBody = $('.modal-body');
+                modalBody.empty();
+                cartItems.forEach(function(item) {
+                    modalBody.append('<h5>' + item.restaurantName + '</h5>');
+                    modalBody.append('<p>' + item.dishName + ' - ' + item.dishPrice + '</p>');
+                });
             }
-            let totalPrice = calculateTotalPrice(cartItems);
-            $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
+
+            function calculateTotalPrice(cartItems) {
+                let totalPrice = 0;
+                cartItems.forEach(function(item) {
+                    totalPrice += parseFloat(item.dishPrice);
+                });
+                clearCart();
+                return totalPrice.toFixed(2);
+            }
+
+
+            $('.btn.btn-primary[data-toggle="modal"][data-target="#cartModal"]').click(function() {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                displayCartItems(cartItems);
+            });
+
+            $('.btn.btn-primary[data-dismiss="modal"][data-toggle="modal"][data-target="#totalPriceModal"]').click(function() {
+                $('#cartModal').modal('hide');
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                if(cartItems.length === 0) {
+                    alert("Ваша корзина пуста. Пожалуйста, добавьте товары перед оформлением заказа.");
+                    return false;
+                }
+                let totalPrice = calculateTotalPrice(cartItems);
+                $('#totalPriceModal .modal-body').html('<p>Общая сумма покупки: ' + totalPrice + '</p>');
+
+                $('#totalPriceModal .btn.btn-primary').click(function() {
+                });
+            });
 
             $('#totalPriceModal .btn.btn-primary').click(function() {
+
             });
         });
 
+        function clearCart() {
+            localStorage.removeItem('cartItems');
+            $.post('/{restaurantId}/clearCart', function() {
+            });
+        }
 
-        $('#totalPriceModal .btn.btn-primary').click(function() {
-
-        });
-    });
-
-    function clearCart() {
-        localStorage.removeItem('cartItems');
-        $.post('/{restaurantId}/clearCart', function() {
-        });
-    }
-
-</script>
+    </script>
 </@main.layout>
